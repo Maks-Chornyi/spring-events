@@ -1,14 +1,27 @@
 package com.makschornyi.springevents.model;
 
 
+import com.makschornyi.springevents.model.listener.UserEntityListener;
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@Entity
+@EntityListeners(UserEntityListener.class)
+@Table(name = "usr")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int age;
+
+    @Enumerated(EnumType.ORDINAL)
     private UserType type;
+
+    public User() {
+    }
 
     public User(Long id, String name, int age) {
         this.id = id;
